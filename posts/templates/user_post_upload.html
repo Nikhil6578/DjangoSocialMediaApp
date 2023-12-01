@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User_Post_Upload</title>
+    <style>
+    /* Style the form container */
+    h3,form {
+        max-width: 400px; /* Set maximum width for the form */
+        margin: 0 auto; /* Center the form horizontally */
+        padding: 20px; /* Add some padding */
+        border: 1px solid #ccc; /* Add a border */
+        border-radius: 5px; /* Add border radius */
+        background-color: #f9f9f9; /* Light background color */
+    }
+
+    /* Style form elements */
+    form input[type="text"],
+    form input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box; /* Include padding and border in element's total width and height */
+    }
+
+    /* Style the submit button */
+    form button[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Change button background color on hover */
+    form button[type="submit"]:hover {
+        background-color: #45a049;
+    }
+        #btn{
+        background-color:red;
+         color:white;
+         border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        }
+        #btn a{
+        color:white;
+        text-decoration:none;
+        }
+</style>
+
+</head>
+<body>
+
+<h3>User Post Upload</h3>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+    <button id="btn" > <a href="/posts/user_post/"> Cancel </a> </button>
+</form>
+
+</body>
+</html>

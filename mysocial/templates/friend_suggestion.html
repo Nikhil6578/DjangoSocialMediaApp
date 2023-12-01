@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% block title %}Friend_Request_List{% endblock %}
+
+{% block additional_styles %}
+    <style>
+
+ <!--friends suggesstion detail        -->
+        h2{
+        text-align:center;
+        }
+
+<!--  search bar css      -->
+       form {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Style the input field */
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    width: 35%;
+}
+
+/* Style the search button */
+button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #318CE7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button[type="submit"]:hover {
+    background-color:#4B9CD3
+}
+
+<!--friend request css-->
+
+.container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    height: 100vh;
+    /* Additional styles for the container if needed */
+}
+
+.content {
+    width: 300px;
+    /* Additional styles for the content if needed */
+}
+
+.other-users {
+    margin-bottom: 20px;
+    /* Additional styles for other users if needed */
+}
+
+.button-container {
+<!--    text-align: right;-->
+    /* Additional styles for the button container if needed */
+}
+
+.button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 15px;
+    border-radius:5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    pointer:cursor;
+    margin-bottom:20px;
+    margin-top:0px;
+}
+.button1{
+    background-color:#ADD8E6;
+    color: white;
+    padding: 5px 15px;
+    border-radius:5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    pointer:cursor;
+    margin-bottom:20px;
+    margin-top:0px;
+
+    }
+
+.button a {
+    color: white;
+    text-decoration: none;
+}
+.user-image {
+        max-width: 100px; /* Set the maximum width of the user image */
+        border-radius: 50%; /* Make the image circular */
+        margin-bottom: 1px; /* Provide some spacing between the image and other details */
+}
+
+#friend{
+background-color:#C4A484;
+}
+ #btn{
+ background-color:red;
+ color:white;
+        }
+  #btn a{
+        color:white;
+        text-decoration:none;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<h2>Friend Suggestion</h2>
+<!--for searching a friend-->
+<form method="get" action="{% url 'mysocial:friend_suggestion' %}">
+    <input type="text" name="q" placeholder="Search by username or email...">
+    <button type="submit">Search</button>
+</form>
+
+<!--for friend request handling-->
+<div class="other-users">
+    {% for person in other_user_profiles %}
+        <img src="{{ person.user_image.url }}" alt="User Image" class="user-image">
+        <h4>{{ person.user.username }}</h4>
+
+        <div class="button-container">
+            {% if person.user.userprofile not in friend_list %}
+                {% if person.user.username not in receive_list %}
+                    {% if person.user.username not in sent_list %}
+                        <button class="button">
+                            <a href="{% url 'mysocial:send_friend_request' person.user.userprofile.id %}">
+                                Send Request
+                            </a>
+                        </button>
+                    {% else %}
+                        <button class="button1">
+                            <a> Pending </a>
+                        </button>
+                        <button class="button1" id="btn" >
+                            <a href="{% url 'mysocial:cancel_friend_request' person.user.userprofile.id %}">
+                                Cancel Request
+                            </a>
+                        </button>
+                    {% endif %}
+                {% else %}
+                       <button class="button1">
+                            <a> Pending </a>
+                        </button>
+
+                    {% endif %}
+            {% else %}
+                <button class="button1" id="friend">
+                            <a> Friends </a>
+                        </button>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

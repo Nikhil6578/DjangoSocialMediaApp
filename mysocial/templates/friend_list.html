@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}FriendList{% endblock %}
+
+{% block additional_styles %}
+    <style>
+        <!--     css for friendlist-->
+<!--    /* Apply CSS styles to the friend list container */-->
+.friend-list {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    text-align: center; /* Center-align content inside the friend-list container */
+}
+
+/* Style the heading inside the friend list */
+.friend-list h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333; /* Set the heading color */
+}
+
+/* Style the images inside the friend list */
+.friend-list img {
+    width: 100px; /* Set the width of the friend images */
+    height: 100px; /* Set the height of the friend images */
+    border-radius: 50%; /* Make the images round */
+    margin-bottom: -14px;
+}
+
+/* Style the usernames */
+.friend-list h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #555; /* Set the username color */
+}
+
+/* Style the "View Post" buttons */
+.friend-list button {
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Add a smooth transition effect */
+    margin-bottom:29px;
+}
+
+/* Change button color on hover */
+.friend-list button:hover {
+    background-color: #45a049; /* Darker green color on hover */
+}
+
+/* Style the "No friends available" message */
+.no-friends-message {
+    font-size: 18px;
+    color: #555;
+    margin-top: 20px; /* Add some space above the message */
+}
+.posts{
+  height:100px;
+  width:150px;
+  border-radius: 50%;
+
+}
+.friend-list button a {
+    text-decoration: none;
+color:white;
+}
+
+#remove{
+background-color:red;
+}
+    </style>
+{% endblock %}
+
+{% block content %}
+
+     <div class="friend-list">
+        <h2>Friend List</h2>
+        {% if friend %}
+        {% for friends in friend%}
+             <img src="{{friends.url}}" alt="Friend Image" >
+              <h4>{{ friends.username }}</h4>
+         <h4> Friendship Date: {{ friends.friendship_at }}</h4>
+
+              <button>
+                  <a href="{% url 'posts:user_friend_post' request_id=friends.id  %}" >View Post</a>
+              </button>
+              <button id="remove" >
+                  <a href="{% url 'mysocial:user_friend_delete' request_id=friends.id  %}" >Remove</a>
+              </button>
+           <br>
+            {% endfor %}
+
+        {% else %}
+            <p class="no-friends-message">No friends available.</p>
+        {% endif %}
+    </div>
+{% endblock %}

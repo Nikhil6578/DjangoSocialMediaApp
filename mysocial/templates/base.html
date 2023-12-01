@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock %}</title>
+    <!-- Add your common CSS links or stylesheets here -->
+    <style>
+     body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        <!--        //navbar-css     -->
+/* CSS for Navbar */
+.navbar {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Make the navbar full-width */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.logo {
+    font-size: 1.5em;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 20px;
+    display: flex;
+    background-color: #333;
+    align-items: center; /* Vertically center menu items */
+}
+
+.menu li {
+    margin: 0 25px;
+    padding:0px 85px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.menu a:hover {
+    color: #ffc107; /* Change the color on hover */
+}
+
+{% block additional_styles %}
+
+{% endblock %}
+
+    </style>
+
+</head>
+
+<body>
+   <nav class="navbar">
+    <div class="logo">
+        User Dashboard
+    </div>
+    <div class="menu">
+        <ul>
+            <li><a href="/mysocial/userdetail/">Profile</a></li>
+            <li><a href="/posts/user_post/">NewsFeed</a></li>
+            <li><a href="/mysocial/friend_suggestion/">FriendSuggestion</a></li>
+            <li><a href="/mysocial/friendrequestlist/">FriendRequests</a></li>
+            <li><a href="/mysocial/friendslist/">Friends</a></li>
+            <li><a href="/mysocial/logout/">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+        {% block content %}{% endblock %}
+
+    <!-- Add your common JavaScript links or scripts here -->
+    {% block additional_scripts %}{% endblock %}
+
+
+</body>
+
+</html>

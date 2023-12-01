@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}Friend_Request_List{% endblock %}
+
+{% block additional_styles %}
+    <style>
+    /* CSS for the provided Django template code */
+
+.content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.post-container {
+    width: 300px;
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.post-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.post-caption {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.post-date {
+    font-style: italic;
+    color: #888;
+    margin-top: 5px;
+}
+
+.no-posts-message {
+    font-size: 16px;
+    color: #555;
+    text-align: center;
+    margin-top: 20px;
+}
+
+    </style>
+{% endblock %}
+
+{% block content %}
+ <div class="content-wrapper">
+    {% if friend.userpost_set.exists %}
+        {% for user_post in friend.userpost_set.all %}
+            <div class="post-container">
+                <div class="img">
+                    <img src="{{ user_post.post.url }}" class="post-image">
+                </div>
+                <h3 class="post-caption">{{ user_post.caption }}</h3>
+                <h4 class="post-date">{{ user_post.dop }}</h4>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="no-posts-message">No posts available for this friend.</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+
+
+
+

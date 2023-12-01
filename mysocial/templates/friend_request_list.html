@@ -1,0 +1,283 @@
+{% extends 'base.html' %}
+
+{% block title %}Friend_Request_List{% endblock %}
+
+{% block additional_styles %}
+    <style>
+        <!--        friendlist css-->
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .friend-requests {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .friend-request-item {
+            margin-bottom: 20px;
+        }
+
+        .friend-request-actions {
+            margin-top: 10px;
+        }
+
+        .accept-button, .reject-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .reject-button {
+            background-color: #FF5733;
+        }
+
+<!--        .accept-button:hover, .reject-button:hover {-->
+<!--            background-color: #45a049;-->
+<!--        }-->
+
+        .no-requests-message {
+            font-size: 18px;
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+     <div class="friend-requests">
+        <h2>Received Friend Requests</h2>
+        <ul>
+            {% for request in received_requests %}
+                <li class="friend-request-item">
+                    {{ request.from_user.user.username }}
+                    {% if request.status == 'pending' %}
+                        has sent you a friend request.
+                        <div class="friend-request-actions">
+                            <a class="accept-button" href="{% url 'mysocial:accept_friend_request' request.id %}">Accept</a>
+                            <a class="reject-button" href="{% url 'mysocial:reject_friend_request' request.id %}">Reject</a>
+                        </div>
+                    {% elif request.status == 'accepted' %}
+                        is now your friend.
+                    {% elif request.status == 'rejected' %}
+                        friend request was rejected.
+                    {% endif %}
+                </li>
+            {% empty %}
+                <li class="no-requests-message">No pending friend requests.</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Friend_Request_List</title>-->
+<!--    <style>-->
+
+<!--  body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            background-color: #f4f4f4;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--        }-->
+<!--        &lt;!&ndash;        //navbar-css     &ndash;&gt;-->
+<!--/* CSS for Navbar */-->
+<!--.navbar {-->
+<!--    background-color: #333;-->
+<!--    color: white;-->
+<!--    padding: 15px;-->
+<!--    display: flex;-->
+<!--    justify-content: space-between;-->
+<!--    width: 100%; /* Make the navbar full-width */-->
+<!--    box-sizing: border-box; /* Include padding and border in the element's total width and height */-->
+<!--}-->
+
+<!--.logo {-->
+<!--    font-size: 1.5em;-->
+<!--}-->
+
+<!--.menu ul {-->
+<!--    list-style: none;-->
+<!--    padding: 20px;-->
+<!--    display: flex;-->
+<!--    background-color: #333;-->
+<!--    align-items: center; /* Vertically center menu items */-->
+<!--}-->
+
+<!--.menu li {-->
+<!--    margin: 0 25px;-->
+<!--    padding:0px 85px;-->
+<!--}-->
+
+<!--.menu a {-->
+<!--    text-decoration: none;-->
+<!--    color: white;-->
+<!--    transition: all 0.3s ease;-->
+<!--}-->
+
+<!--.menu a:hover {-->
+<!--    color: #ffc107; /* Change the color on hover */-->
+<!--}-->
+
+
+<!--&lt;!&ndash;        friendlist css&ndash;&gt;-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            background-color: #f4f4f4;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--        }-->
+
+<!--        h2 {-->
+<!--            background-color: #4CAF50;-->
+<!--            color: white;-->
+<!--            text-align: center;-->
+<!--            padding: 10px;-->
+<!--        }-->
+
+<!--        .friend-requests {-->
+<!--            margin: 20px;-->
+<!--            padding: 20px;-->
+<!--            background-color: white;-->
+<!--            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+
+<!--        .friend-request-item {-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        .friend-request-actions {-->
+<!--            margin-top: 10px;-->
+<!--        }-->
+
+<!--        .accept-button, .reject-button {-->
+<!--            background-color: #4CAF50;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            padding: 10px 20px;-->
+<!--            margin-right: 10px;-->
+<!--            cursor: pointer;-->
+<!--            transition: background-color 0.3s ease;-->
+<!--        }-->
+
+<!--        .reject-button {-->
+<!--            background-color: #FF5733;-->
+<!--        }-->
+
+<!--&lt;!&ndash;        .accept-button:hover, .reject-button:hover {&ndash;&gt;-->
+<!--&lt;!&ndash;            background-color: #45a049;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--        .no-requests-message {-->
+<!--            font-size: 18px;-->
+<!--            text-align: center;-->
+<!--            margin: 20px 0;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<nav class="navbar">-->
+<!--    <div class="logo">-->
+<!--        User Dashboard-->
+<!--    </div>-->
+<!--    <div class="menu">-->
+<!--        <ul>-->
+<!--            <li><a href="/mysocial/userdetail/">Profile</a></li>-->
+<!--            <li><a href="/posts/user_post/">UserPost</a></li>-->
+<!--            <li><a href="/mysocial/friendrequestlist/">Friend_Requests</a></li>-->
+<!--            <li><a href="/mysocial/friend_suggestion/">Friend_Suggestion</a></li>-->
+<!--            <li><a href="/mysocial/friendslist/">Friends</a></li>-->
+<!--            <li><a href="/mysocial/logout/">Logout</a></li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</nav>-->
+
+
+
+<!--    <div class="friend-requests">-->
+<!--        <h2>Received Friend Requests</h2>-->
+<!--        <ul>-->
+<!--            {% for request in received_requests %}-->
+<!--                <li class="friend-request-item">-->
+<!--                    {{ request.from_user.user.username }}-->
+<!--                    {% if request.status == 'pending' %}-->
+<!--                        has sent you a friend request.-->
+<!--                        <div class="friend-request-actions">-->
+<!--                            <a class="accept-button" href="{% url 'mysocial:accept_friend_request' request.id %}">Accept</a>-->
+<!--                            <a class="reject-button" href="{% url 'mysocial:reject_friend_request' request.id %}">Reject</a>-->
+<!--                        </div>-->
+<!--                    {% elif request.status == 'accepted' %}-->
+<!--                        is now your friend.-->
+<!--                    {% elif request.status == 'rejected' %}-->
+<!--                        friend request was rejected.-->
+<!--                    {% endif %}-->
+<!--                </li>-->
+<!--            {% empty %}-->
+<!--                <li class="no-requests-message">No pending friend requests.</li>-->
+<!--            {% endfor %}-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+
+
+<!--https://chat.openai.com/c/10544b9b-f8a6-47c9-80fd-742de90e9ab2-->

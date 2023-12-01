@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Friend_Request_List{% endblock %}
+
+{% block additional_styles %}
+    <style>
+   //user -profile css
+
+  h2{
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        padding: 20px 100px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        margin: 0;x;
+        text-align:center;
+  }
+   .user-details {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        padding: 100px 100px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        margin: 0;
+<!--        text-align: center;-->
+    }
+    .user-image {
+        max-width: 200px; /* Set the maximum width of the user image */
+        border-radius: 50%; /* Make the image circular */
+        margin-bottom: 20px; /* Provide some spacing between the image and other details */
+    }
+
+    .user-details p {
+        margin: 7px 0;
+    }
+
+    .user-details .user-email {
+        color: #007bff;
+    }
+
+    .user-details .user-age,
+    .user-details .user-gender,
+    .user-details .user-dob,
+    .user-details .user-phone,
+    .user-details .user-address,
+     {
+        font-weight: bold;
+    }
+.button {
+    margin-top:5px;
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+<!--    transition: background-color 0.3s;-->
+}
+button a{
+text-decoration:none;
+color:white
+}
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<h2>User Details</h2>
+<div class="user-details">
+    <img src="{{data.user_image.url}}" alt="User Image" class="user-image">
+    <p> Name : {{ data.user.username }}</p>
+    <p class="user-email"> Email: {{ data.user.email }}</p>
+    <p class="user-dob">Gender: {{ data.dob }}</p>
+    <p class="user-gender">Gender: {{ data.gender }}</p>
+    <p class="user-phone">Phone Number: {{ data.phone_number }}</p>
+    <p class="user-address">Address: {{ data.address }}</p>
+
+
+</div>
+
+<button class="button" type="submit">
+    <a href="/mysocial/userupdate/" >
+    Update
+    </a>
+</button>
+{% endblock %}
+
+
